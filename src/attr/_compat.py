@@ -127,7 +127,7 @@ def make_set_closure_cell():
             cell.__setstate__((value,))
     else:
         ctypes = import_ctypes()
-        if ctypes is not None:
+        if ctypes is not None and hasattr(ctypes, 'pythonapi'):
             set_closure_cell = ctypes.pythonapi.PyCell_Set
             set_closure_cell.argtypes = (ctypes.py_object, ctypes.py_object)
             set_closure_cell.restype = ctypes.c_int
